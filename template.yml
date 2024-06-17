@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  CheckEligibilityFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: dist/eligibility/index.handler
+      Runtime: nodejs18.x
+      CodeUri: .
+      MemorySize: 128
+      Timeout: 10
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Events:
+        CheckEligibilityApi:
+          Type: Api
+          Properties:
+            Path: /eligibility
+            Method: post
